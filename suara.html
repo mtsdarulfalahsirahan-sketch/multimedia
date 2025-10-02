@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Latihan Mengisi Teks Rumpang</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #b3d9ff; /* biru muda */
+      margin: 0;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      background: #ffffff;
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+
+    h1 {
+      text-align: center;
+    }
+
+    audio {
+      display: block;
+      margin: 0 auto 20px auto;
+    }
+
+    .text-area {
+      font-size: 18px;
+      line-height: 1.8;
+    }
+
+    .blank {
+      width: 120px;
+      padding: 6px;
+      border-radius: 4px;
+      border: 1px solid #aaa;
+      font-size: 16px;
+      margin: 0 4px;
+    }
+
+    .controls {
+      margin-top: 20px;
+      text-align: center;
+    }
+
+    button {
+      padding: 10px 16px;
+      margin: 0 6px;
+      border-radius: 8px;
+      border: none;
+      font-size: 16px;
+      cursor: pointer;
+      box-shadow: 0 3px 6px rgba(0,0,0,0.15);
+    }
+
+    #check {
+      background: #4CAF50;
+      color: white;
+    }
+
+    #reset {
+      background: #e0e0e0;
+    }
+
+    #feedback {
+      text-align: center;
+      margin-top: 16px;
+      font-weight: 600;
+      min-height: 24px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Latihan Mengisi Teks Rumpang</h1>
+    <audio controls>
+      <source src="https://mtsdarulfalahsirahan-sketch.github.io/multimedia/diriku.mp3" type="audio/mpeg">
+      Browser anda tidak mendukung audio
+    </audio>
+
+    <div class="text-area">
+      Hello, my name is Ahmad Ridwan. I 
+      <input type="text" id="blank1" class="blank" placeholder="[1]"> 
+      born in the small 
+      <input type="text" id="blank2" class="blank" placeholder="[2]"> 
+      of Mojo Cluwak, Pati. I was born in June 
+      <input type="text" id="blank3" class="blank" placeholder="[3]"> 
+      I am 
+      <input type="text" id="blank4" class="blank" placeholder="[4]"> 
+      to Milla Rofiqoh and I have been blessed with 
+      <input type="text" id="blank5" class="blank" placeholder="[5]"> 
+      children.
+    </div>
+
+    <div class="controls">
+      <button id="check">Hasil</button>
+      <button id="reset">Reset</button>
+    </div>
+    <div id="feedback"></div>
+  </div>
+
+  <script>
+    const correctAnswers = {
+      blank1: 'was',
+      blank2: 'village',
+      blank3: '1990',
+      blank4: 'married',
+      blank5: 'two'
+    };
+
+    const inputs = [
+      document.getElementById('blank1'),
+      document.getElementById('blank2'),
+      document.getElementById('blank3'),
+      document.getElementById('blank4'),
+      document.getElementById('blank5')
+    ];
+
+    const feedback = document.getElementById('feedback');
+
+    document.getElementById('check').addEventListener('click', () => {
+      let allCorrect = true;
+      inputs.forEach((input, index) => {
+        const key = 'blank' + (index + 1);
+        const userValue = input.value.trim().toLowerCase();
+        const correctValue = correctAnswers[key].toLowerCase();
+        if (userValue !== correctValue) {
+          allCorrect = false;
+        }
+      });
+      if (allCorrect) {
+        feedback.style.color = '#0b6b1e';
+        feedback.textContent = 'Hebat jawaban anda benar';
+      } else {
+        feedback.style.color = '#a71d2a';
+        feedback.textContent = 'Maaf jawaban anda salah ulangi lagi';
+      }
+    });
+
+    document.getElementById('reset').addEventListener('click', () => {
+      inputs.forEach(input => input.value = '');
+      feedback.textContent = '';
+    });
+  </script>
+</body>
+</html>
